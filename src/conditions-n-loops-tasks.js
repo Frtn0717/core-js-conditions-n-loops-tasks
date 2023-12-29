@@ -21,8 +21,8 @@
  *  0  => true
  *  -5 => false
  */
-function isPositive(/* number */) {
-  throw new Error('Not implemented');
+function isPositive(number) {
+  return number >= 0;
 }
 
 /**
@@ -38,8 +38,11 @@ function isPositive(/* number */) {
  *  -5, 0, 5      => 5
  *  -0.1, 0, 0.2  => 0.2
  */
-function getMaxNumber(/* a, b, c */) {
-  throw new Error('Not implemented');
+function getMaxNumber(a, b, c) {
+  if (a > b) {
+    return a > c ? a : c;
+  }
+  return b > c ? b : c;
 }
 
 /**
@@ -82,8 +85,11 @@ function canQueenCaptureKing(/* queen, king */) {
  *  2, 2, 5   => false
  *  3, 0, 3   => false
  */
-function isIsoscelesTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isIsoscelesTriangle(a, b, c) {
+  const isNotTriangle = a + b < c || a + c < b || b + c < a;
+  const isZero = a === 0 || b === 0 || c === 0;
+  if (isNotTriangle || isZero) return false;
+  return a === b || b === c || a === c;
 }
 
 /**
@@ -100,8 +106,67 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  let result = '';
+
+  function makeRomanFromDigit(n) {
+    if (n !== 0) {
+      if (n - 10 >= 0) {
+        result += 'X';
+        return makeRomanFromDigit(n - 10);
+      }
+
+      if (n - 9 >= 0) {
+        result += 'IX';
+        return makeRomanFromDigit(n - 9);
+      }
+
+      if (n - 8 >= 0) {
+        result += 'VIII';
+        return makeRomanFromDigit(n - 8);
+      }
+
+      if (n - 7 >= 0) {
+        result += 'VII';
+        return makeRomanFromDigit(n - 7);
+      }
+
+      if (n - 6 >= 0) {
+        result += 'VI';
+        return makeRomanFromDigit(n - 6);
+      }
+
+      if (n - 5 >= 0) {
+        result += 'V';
+        return makeRomanFromDigit(n - 5);
+      }
+
+      if (n - 4 >= 0) {
+        result += 'IV';
+        return makeRomanFromDigit(n - 4);
+      }
+
+      if (n - 3 >= 0) {
+        result += 'III';
+        return makeRomanFromDigit(n - 3);
+      }
+
+      if (n - 2 >= 0) {
+        result += 'II';
+        return makeRomanFromDigit(n - 2);
+      }
+
+      if (n - 1 === 0) {
+        result += 'I';
+        return makeRomanFromDigit(n - 1);
+      }
+    }
+    return '';
+  }
+
+  makeRomanFromDigit(num);
+
+  return result;
 }
 
 /**
@@ -135,8 +200,14 @@ function convertNumberToString(/* numberStr */) {
  *  '0123210'   => true
  *  'qweqwe'    => false
  */
-function isPalindrome(/* str */) {
-  throw new Error('Not implemented');
+function isPalindrome(str) {
+  let result = '';
+  let i = str.length - 1;
+  while (i >= 0) {
+    result += str[i];
+    i -= 1;
+  }
+  return str === result;
 }
 
 /**
@@ -153,8 +224,15 @@ function isPalindrome(/* str */) {
  *  'qwerty', 'Q'     => -1
  *  'qwerty', 'p'     => -1
  */
-function getIndexOf(/* str, letter */) {
-  throw new Error('Not implemented');
+function getIndexOf(str, letter) {
+  let i = 0;
+  while (i < str.length) {
+    if (str[i] === letter) {
+      return i;
+    }
+    i += 1;
+  }
+  return -1;
 }
 
 /**
@@ -172,8 +250,18 @@ function getIndexOf(/* str, letter */) {
  *  12345, 0    => false
  *  12345, 6    => false
  */
-function isContainNumber(/* num, digit */) {
-  throw new Error('Not implemented');
+function isContainNumber(num, digit) {
+  const numToString = `${num}`;
+  let i = numToString.length - 1;
+  let result = false;
+
+  while (i >= 0) {
+    if (+numToString[i] === digit) {
+      result = true;
+    }
+    i -= 1;
+  }
+  return result;
 }
 
 /**
